@@ -7,6 +7,7 @@ import java.util.HashMap;
 import cn.sharesdk.ShareSDKConfiguration;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.login.PlatformDbListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
@@ -54,26 +55,10 @@ public class ShareSDKUtil {
 
         oks.share(map);
     }
-//    /**
-//     * 登陆
-//     * @param context
-//     * @param platform
-//     * @param platformActionListener
-//     * @param platformDbListener
-//     */
-//    public static void authorize(Context context, Platform platform, PlatformActionListener platformActionListener, PlatformDbListener platformDbListener) {
-//        ShareSDKConfiguration.init(context);
-//        if (platform == null) {
-//            return;
-//        }
-////
-//        if (platform.isAuthValid()) {
-//            platformDbListener.getPlatformDb(platform.getDb());
-//
-//        } else {
-//            platform.setPlatformActionListener(platformActionListener);
-//            platform.SSOSetting(true);
-//            platform.showUser(null);
-//        }
-//    }
+
+    public static void share(Context context, String platformString, ShareSDKInfo shareSDKInfo, PlatformActionListener callback) {
+        Platform platform = ShareSDK.getPlatform(platformString);
+
+        share(context, platform, shareSDKInfo, callback);
+    }
 }

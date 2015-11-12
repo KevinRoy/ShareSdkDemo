@@ -8,6 +8,7 @@ import java.util.HashMap;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.login.LoginSDKUtil;
 import cn.sharesdk.login.PlatformDbListener;
 import cn.sharesdk.share.ShareSDKInfo;
 import cn.sharesdk.share.ShareSDKUtil;
@@ -43,18 +44,7 @@ public class ShareUtil {
         });
     }
 
-    public static void authorize(Context context, String platformString, PlatformActionListener platformActionListener, PlatformDbListener platformDbListener) {
-        Platform platform = ShareSDK.getPlatform(platformString);
-
-        ShareSDKUtil.authorize(context, platform, platformActionListener, platformDbListener);
-    }
-
-    public static void share(Context context, Platform platform, PlatformActionListener platformActionListener) {
-        ShareSDKInfo shareSDKInfo = new ShareSDKInfo(platform);
-        shareSDKInfo.setText("我是text");
-        shareSDKInfo.setTitle("我是title");
-        shareSDKInfo.setImgUrl("http://www.baidu.com/img/baidu_jgylogo3.gif?v=43167716.gif");
-
-        ShareSDKUtil.share(context, platform, shareSDKInfo, platformActionListener);
+    public static void authorize(Context context, String platformString, PlatformDbListener platformDbListener) {
+        LoginSDKUtil.login(context, platformString, platformDbListener);
     }
 }
