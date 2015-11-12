@@ -12,6 +12,7 @@ import cn.sharesdk.ShareSDKConfiguration;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.PlatformDb;
+import cn.sharesdk.framework.ShareSDK;
 
 /**
  * Created by kevin on 15/11/12.
@@ -52,7 +53,8 @@ public class LoginApi implements Handler.Callback {
                 // 成功
                 Log.d(TAG, "complete");
                 Object[] objs = (Object[]) msg.obj;
-                Platform platform = (Platform) objs[0];
+                String plat = (String) objs[0];
+                Platform platform = ShareSDK.getPlatform(plat);
                 PlatformDb platformDb = platform.getDb();
                 platformDbListener.complete(platformDb);
                 break;
