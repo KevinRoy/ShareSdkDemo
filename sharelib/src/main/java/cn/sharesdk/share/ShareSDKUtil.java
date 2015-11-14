@@ -12,6 +12,7 @@ import cn.sharesdk.login.PlatformDbListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
+ * 分享Util
  * Created by kevin on 15/11/10.
  */
 public class ShareSDKUtil {
@@ -33,17 +34,17 @@ public class ShareSDKUtil {
     }
 
     /**
-     * 分享
+     * 分享（一键分享）OneKeyShare
      *
      * @param context
      * @param platform
      * @param shareSDKInfo
-     * @param callback
+     * @param platformActionListener
      */
-    public static void share(Context context, Platform platform, ShareSDKInfo shareSDKInfo, PlatformActionListener callback) {
+    public static void share(Context context, Platform platform, ShareSDKInfo shareSDKInfo, PlatformActionListener platformActionListener) {
         ShareSDKConfiguration.init(context);
         OnekeyShare oks = new OnekeyShare();
-        oks.setCallback(callback);
+        oks.setCallback(platformActionListener);
 
         //关闭sso授权
         if (!isSSO) {
@@ -56,9 +57,34 @@ public class ShareSDKUtil {
         oks.share(map);
     }
 
-    public static void share(Context context, String platformString, ShareSDKInfo shareSDKInfo, PlatformActionListener callback) {
+    /**
+     * 指定平台分享
+     *
+     * @param context
+     * @param platform
+     * @param shareCommonParams
+     * @param platformActionListener
+     */
+    public static void share(Context context, Platform platform, ShareCommonParams shareCommonParams, PlatformActionListener platformActionListener) {
+        if (platform == null || shareCommonParams == null)
+            return;
+
+        ShareSDKConfiguration.init(context);
+        platform.SSOSetting(false);
+        platform.setPlatformActionListener(platformActionListener);
+
+        platform.share(shareCommonParams);
+    }
+
+    public static void share(Context context, String platformString, ShareSDKInfo shareSDKInfo, PlatformActionListener platformActionListener) {
         Platform platform = ShareSDK.getPlatform(platformString);
 
-        share(context, platform, shareSDKInfo, callback);
+        share(context, platform, shareSDKInfo, platformActionListener);
+    }
+
+    public static void share(Context context, String platformString, ShareCommonParams shareCommonParams, PlatformActionListener platformActionListener) {
+        Platform platform = ShareSDK.getPlatform(platformString);
+
+        share(context, platform, shareCommonParams, platformActionListener);
     }
 }

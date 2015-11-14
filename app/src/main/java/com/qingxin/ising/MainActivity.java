@@ -3,10 +3,16 @@ package com.qingxin.ising;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
+
+import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.sharesdk.ShareSDKConfiguration;
 import cn.sharesdk.facebook.Facebook;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.google.GooglePlus;
@@ -45,6 +51,29 @@ public class MainActivity extends AppCompatActivity implements PlatformDbListene
     @OnClick(R.id.share_facebook)
     void shareFacebook() {
         ShareUtil.share(this, Facebook.NAME);
+//        ShareSDKConfiguration.init(MainActivity.this);
+//
+//        Facebook.ShareParams sp = new Facebook.ShareParams();
+//        sp.setText("测试分享的文本");
+//
+//        Platform facebook = ShareSDK.getPlatform(Facebook.NAME);
+//        facebook.setPlatformActionListener(new PlatformActionListener() {
+//            @Override
+//            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+//                Log.i("haha", "onComplete");
+//            }
+//
+//            @Override
+//            public void onError(Platform platform, int i, Throwable throwable) {
+//                Log.i("haha", "onError");
+//            }
+//
+//            @Override
+//            public void onCancel(Platform platform, int i) {
+//                Log.i("haha", "onCancel");
+//            }
+//        }); // 设置分享事件回调
+//        facebook.share(sp);
     }
 
     @OnClick(R.id.login_twitter)
