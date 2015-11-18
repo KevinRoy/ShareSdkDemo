@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 
 import java.util.HashMap;
 
@@ -56,6 +58,7 @@ public class LoginApi implements Handler.Callback {
                 String plat = (String) objs[0];
                 Platform platform = ShareSDK.getPlatform(plat);
                 PlatformDb platformDb = platform.getDb();
+                String token = platformDb.getToken();
                 platformDbListener.complete(platformDb);
                 break;
         }
@@ -82,6 +85,11 @@ public class LoginApi implements Handler.Callback {
         if (platform == null) {
             return;
         }
+
+        CookieSyncManager.createInstance(platform.getContext());
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.removeAllCookie();
+        CookieSyncManager.getInstance().sync();
 
         if (platform.isAuthValid()) {
             platform.removeAccount(true);

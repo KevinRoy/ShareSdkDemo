@@ -3,13 +3,11 @@ package com.qingxin.ising;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.sharesdk.ShareSDKConfiguration;
 import cn.sharesdk.facebook.Facebook;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
@@ -21,7 +19,7 @@ import cn.sharesdk.login.PlatformDbListener;
 import cn.sharesdk.twitter.Twitter;
 import cn.sharesdk.wechat.moments.WechatMoments;
 
-public class MainActivity extends AppCompatActivity implements PlatformDbListener {
+public class MainActivity extends AppCompatActivity implements PlatformDbListener, PlatformActionListener {
 
     @OnClick(R.id.login_google)
     void loginGoogle() {
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements PlatformDbListene
 
     @OnClick(R.id.share_google)
     void shareGoogle() {
-        ShareUtil.share(this, GooglePlus.NAME);
+        ShareUtil.share(this, GooglePlus.NAME, this);
     }
 
     @OnClick(R.id.login_weixin)
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements PlatformDbListene
 
     @OnClick(R.id.share_weixin)
     void shareWeixin() {
-        ShareUtil.share(this, WechatMoments.NAME);
+        ShareUtil.share(this, WechatMoments.NAME, this);
     }
 
     @OnClick(R.id.login_facebook)
@@ -50,30 +48,7 @@ public class MainActivity extends AppCompatActivity implements PlatformDbListene
 
     @OnClick(R.id.share_facebook)
     void shareFacebook() {
-        ShareUtil.share(this, Facebook.NAME);
-//        ShareSDKConfiguration.init(MainActivity.this);
-//
-//        Facebook.ShareParams sp = new Facebook.ShareParams();
-//        sp.setText("测试分享的文本");
-//
-//        Platform facebook = ShareSDK.getPlatform(Facebook.NAME);
-//        facebook.setPlatformActionListener(new PlatformActionListener() {
-//            @Override
-//            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-//                Log.i("haha", "onComplete");
-//            }
-//
-//            @Override
-//            public void onError(Platform platform, int i, Throwable throwable) {
-//                Log.i("haha", "onError");
-//            }
-//
-//            @Override
-//            public void onCancel(Platform platform, int i) {
-//                Log.i("haha", "onCancel");
-//            }
-//        }); // 设置分享事件回调
-//        facebook.share(sp);
+        ShareUtil.share(this, Facebook.NAME, this);
     }
 
     @OnClick(R.id.login_twitter)
@@ -83,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements PlatformDbListene
 
     @OnClick(R.id.share_twitter)
     void shareTwitter() {
-        ShareUtil.share(this, Twitter.NAME);
+        ShareUtil.share(this, Twitter.NAME, this);
     }
 
     @OnClick(R.id.login_instagram)
@@ -93,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements PlatformDbListene
 
     @OnClick(R.id.share_instagram)
     void shareInstagram() {
-        ShareUtil.share(this, Instagram.NAME);
+        ShareUtil.share(this, Instagram.NAME, this);
     }
 
     @Override
@@ -112,16 +87,31 @@ public class MainActivity extends AppCompatActivity implements PlatformDbListene
 
     @Override
     public void cancel() {
-        Log.i("haha", "cancel");
+        Log.i("haha", "login:cancel");
     }
 
     @Override
     public void error(String errorString) {
-        Log.i("haha", "error" + errorString);
+        Log.i("haha", "error login:" + errorString);
     }
 
     @Override
     public void complete(PlatformDb platformDb) {
-        Log.i("haha", platformDb.toString());
+        Log.i("haha", "login:" + platformDb.toString());
+    }
+
+    @Override
+    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+        Log.d("haha", "share onComplete");
+    }
+
+    @Override
+    public void onError(Platform platform, int i, Throwable throwable) {
+        Log.d("haha", "share onError: " + throwable.getMessage());
+    }
+
+    @Override
+    public void onCancel(Platform platform, int i) {
+        Log.d("haha", "share onCancel");
     }
 }
