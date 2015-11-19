@@ -1,6 +1,7 @@
 package cn.sharesdk.share;
 
 import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
 
 /**
  * 单独分享到各个平台需要的公用ShareParams
@@ -12,6 +13,12 @@ public class ShareCommonParams extends Platform.ShareParams {
 
     public ShareCommonParams(Platform platform) {
         super();
+        this.platform = platform;
+    }
+
+    public ShareCommonParams(String platformString) {
+        super();
+        Platform platform = ShareSDK.getPlatform(platformString);
         this.platform = platform;
     }
 }
