@@ -10,18 +10,32 @@ import cn.sharesdk.framework.ShareSDK;
  */
 public class AccountUtil {
 
+    /**
+     * 清除数据
+     *
+     * @param platformString
+     */
     public static void removeAccount(String platformString) {
         if (TextUtils.isEmpty(platformString))
             return;
 
         Platform platform = ShareSDK.getPlatform(platformString);
-        platform.removeAccount(true);
+        if (platform.isAuthValid()) {
+            platform.removeAccount(true);
+        }
     }
 
+    /**
+     * 清除数据
+     *
+     * @param platform
+     */
     public static void removeAccount(Platform platform) {
         if (platform == null)
             return;
 
-        platform.removeAccount(true);
+        if (platform.isAuthValid()) {
+            platform.removeAccount(true);
+        }
     }
 }
