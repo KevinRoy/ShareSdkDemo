@@ -18,7 +18,7 @@ import cn.sharesdk.wechat.moments.WechatMoments;
  */
 public class ShareSDKConfiguration {
     public static void init(Context context) {
-        init(context, "c27877835ca9");
+        init(context, "key_id");
     }
 
     public static void init(Context context, String appKey) {
