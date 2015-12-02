@@ -12,20 +12,20 @@
 因为shareSdk官方是可以让你在assets里面配置ShareSDK.xml，但笔者在最开始的时候遇到过Android Studio读不出这个坑,不知道现在修复没有，但是为了保险，还是自己写代码配置吧。
 
 在`ShareSDKConfiguration`里面
-```
+```java
 public static void init(Context context，String appKey)
 ```
 
 配置你在ShareSdk申请的appKey
 然后在
-```
+```java
 private static void initPlatform()
 ```
 手动配置你需要的平台，需要怎么做可以查询官网
 
 ### 2. 分享
 具体在`ShareSDKUtil`
-```
+```java
 public static void share(Context context, Platform platform, ShareCommonParams shareCommonParams, PlatformActionListener platformActionListener)
 ```
 目前只做了分享到指定平台和一键分享，上面这是分享到指定平台，具体用法里面写了注释
@@ -34,14 +34,14 @@ public static void share(Context context, Platform platform, ShareCommonParams s
 就是继承的ShareParams，因为这是为了统一传入的参数，可以把一些不同统一写到里面，初衷是好的，虽然暂时没用到
 ### 3. 登录
 具体在`LoginSDKUtil`
-```
+```java
  public static void login(Context context, Platform platform, PlatformDbListener platformDbListener)
 ```
 也没啥可说的，到时候看一下就一目了然了
 
 ### 4. 登出
 具体在`AccountUtil`
-```
+```java
 public static void removeAccount(String platformString)
 ```
 当然感觉主要是清除绑定和授权，但是测了下，有时候如果你手机安装了某个客户端（比如facebook的），好像还是一下子就进去了，后话
