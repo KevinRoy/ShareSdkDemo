@@ -1,11 +1,14 @@
 package com.qingxin.ising;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
 
 import java.util.HashMap;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sharesdk.facebook.Facebook;
@@ -18,6 +21,7 @@ import cn.sharesdk.instagram.Instagram;
 import cn.sharesdk.login.PlatformDbListener;
 import cn.sharesdk.twitter.Twitter;
 import cn.sharesdk.wechat.moments.WechatMoments;
+import cn.sharesdk.whatsapp.WhatsApp;
 
 public class MainActivity extends AppCompatActivity implements PlatformDbListener, PlatformActionListener {
 
@@ -69,6 +73,26 @@ public class MainActivity extends AppCompatActivity implements PlatformDbListene
     @OnClick(R.id.share_instagram)
     void shareInstagram() {
         ShareUtil.share(this, Instagram.NAME, this);
+    }
+
+    @OnClick(R.id.share_whatsapp)
+    void shareWhatsapp() {
+        ShareUtil.share(this, WhatsApp.NAME, this);
+    }
+
+    @OnClick(R.id.share_mobile)
+    void shareMobile() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        // 分享的数据类型
+        intent.setType("text/plain");
+        // 分享的主题
+        intent.putExtra(Intent.EXTRA_SUBJECT, "好友分享");
+        // 分享的内容
+        intent.putExtra(Intent.EXTRA_TEXT, "我正在使用iSing，你也加入吧！！");
+        // 允许启动新的Activity
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // 目标应用寻找对话框的标题
+        startActivity(Intent.createChooser(intent, getTitle()));
     }
 
     @Override

@@ -15,15 +15,15 @@ android {
     signingConfigs {
         debug {
             storeFile file('../ising.keystore')
-            storePassword 'xxx'
-            keyAlias 'xxx'
-            keyPassword 'xxx'
+            storePassword 'titanic395700'
+            keyAlias 'ising.keystore'
+            keyPassword 'titanic395700'
         }
         release {
             storeFile file('../ising.keystore')
-            storePassword 'xxx'
-            keyAlias 'xxx'
-            keyPassword 'xxx'
+            storePassword 'titanic395700'
+            keyAlias 'ising.keystore'
+            keyPassword 'titanic395700'
         }
     }
 

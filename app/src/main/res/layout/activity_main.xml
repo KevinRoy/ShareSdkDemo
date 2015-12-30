@@ -73,6 +73,7 @@
                 android:layout_weight="1"
                 android:text="facebook分享" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -113,6 +114,27 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="instagram分享" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/share_whatsapp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="whatsApp分享" />
+
+            <Button
+                android:id="@+id/share_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="手机自带分享" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
