@@ -49,6 +49,11 @@ public static void removeAccount(String platformString)
 目前只支持Facebook，Google+，Twitter，Instagram，微信
 以后会把其他国内出名的都加上，然后一键分享也做出来，有问题可以提，谢谢大家
 
+### 5. 其他
+有两点补充一下：
+第一：基本是各个分享平台的共性，就是不能连续分享同样的内容，估计为了防止耍广告啥的吧
+第二：Twitter好像有个规定就是分享URL链接不能超过20 Characters然后本身文本也不能超过140 Characters，所以前者可以用短链接试试，后者就只能精简文字了。
+
 # License
 ```
 The MIT License (MIT)
